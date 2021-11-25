@@ -5,15 +5,15 @@ import "./App.css";
 export default function StatusScreen() {
   const url = "http://localhost:8080/status";
 
-  const [data, setData] = useState([]);
+  const [statusData, setStatusData] = useState([]);
 
   const getStatus = () => {
     axios
       .get(url)
-      .then((result) => {
-        console.log(result);
-        const data = result;
-        setData(data);
+      .then((response) => {
+        console.log(response);
+        const statusData = response.data;
+        setStatusData(statusData);
       })
       .catch((err) => {
         console.log(err);
@@ -24,8 +24,8 @@ export default function StatusScreen() {
 
   return (
     <div className="container">
-      <h2>Status code: {data.status}</h2>
-      <h3>Status: {data.data.status}</h3>
+      <h2>Status code: {statusData.statusCode}</h2>
+      <h3>Status: {statusData.status}</h3>
     </div>
   );
 }

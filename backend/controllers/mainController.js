@@ -116,6 +116,7 @@ exports.healthCheck = (req, res, next) => {
     .then(() => {
       console.log("Connection has been established successfully.");
       res.status(200).json({
+        statusCode: 200,
         status: "OK",
       });
     })
