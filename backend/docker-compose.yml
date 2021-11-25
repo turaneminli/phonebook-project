@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    image: mysql
+    restart: on-failure
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+    expose:
+      - 3306
+    ports:
+      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+      - ./db/backup/files/:/data_backup/data
+  app:
+    depends_on:
+      - mysqldb
+    container_name: phonebook_backend
+    build: .
+    restart: on-failure
+    env_file: .env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=$MYSQL_USER
+      - DB_PASSWORD= $MYSQL_ROOT_PASSWORD
+      - DB_NAME=$MYSQL_DATABASE
+      - DB_PORT=$MYSQL_DOCKER_PORT
+    stdin_open: true
+    tty: true
+
+volumes:
+  db-config:
+  db-data:
