@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import os from "os";
 
 export default function HomeScreen() {
   const url = "http://localhost:8080/user/list";
@@ -23,6 +24,7 @@ export default function HomeScreen() {
 
   return (
     <div>
+      <header className="container">Node's Hostname: {os.hostname()}</header>
       <div className="container table-overflow">
         <table>
           <tr>
