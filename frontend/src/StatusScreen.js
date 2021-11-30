@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 export default function StatusScreen() {
-  const url = "http://localhost:8080/status";
+  const url = process.env.REACT_APP_API_URL + "/status";
 
   const [statusData, setStatusData] = useState([]);
 

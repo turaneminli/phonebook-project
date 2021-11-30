@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import os from "os";
 
 export default function HomeScreen() {
-  const url = "http://localhost:8080/user/list";
+  const url = process.env.REACT_APP_API_URL + "/user/list";
+  console.log(url);
 
   const [users, setUsers] = useState([]);
 
