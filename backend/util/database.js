@@ -6,7 +6,7 @@ const username = process.env.SQL_USERNAME;
 const password = process.env.SQL_PASSWORD;
 
 const sequelize = new Sequelize("mydb", "admin", "foobarbaz", {
-  host: "mysqldb.ch9lxjtadwif.us-east-1.rds.amazonaws.com",
+  host: process.env.MYSQL_HOST_ENDPOINT,
   dialect: "mysql",
   port: 3306,
 });
