@@ -1,11 +1,39 @@
-FROM node:alpine
+# local
+# FROM node:alpine
+
+# WORKDIR /app
+
+# COPY package.json ./
+
+# RUN npm install
+# COPY ./ ./
+
+
+# CMD ["npm", "start"]
+
+
+# production
+FROM node:14-alpine as build-stage
 
 WORKDIR /app
 
-COPY package.json ./
-
+# Install dependencies
+COPY package*.json ./
 RUN npm install
-COPY ./ ./
 
+# Build
+COPY . .
+RUN npm run build
 
-CMD ["npm", "start"]
+# -----------------------------------------------------------------------------
+# SERVING IMAGE
+FROM fitiavana07/nginx-react
+
+# Copy built files
+COPY --from=build-stage /app/build /usr/share/nginx/html
+
+# 80 for HTTP
+EXPOSE 80
+
+# Run nginx
+CMD nginx -g 'daemon off;'
