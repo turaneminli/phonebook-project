@@ -32,16 +32,6 @@ resource "aws_lb_listener" "http_backend" {
     type = "forward"
     target_group_arn = aws_lb_target_group.app_target_group_backend.arn
   }
-
-  # default_action {
-  #   type = "fixed-response"
-
-  #   fixed_response {
-  #     content_type = "text/plain"
-  #     message_body = "There's nothing here"
-  #     status_code  = "404"
-  #   }
-  # }
 }
 
 resource "aws_lb_listener_rule" "my_app_listener_rule_backend" {

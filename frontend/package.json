@@ -1,4 +1,6 @@
 {
+  "proxy": "http://localhost:80",
+  "homepage": ".",
   "name": "phonebook",
   "version": "0.1.0",
   "private": true,

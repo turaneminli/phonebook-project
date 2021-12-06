@@ -10,10 +10,10 @@ resource "aws_launch_template" "nodejs_backend" {
 
     network_interfaces {
         associate_public_ip_address = true
-
+        subnet_id = aws_subnet.private-subnet-1.id
         security_groups = [
-            aws_security_group.internet_interfacing_sg.id
-            # aws_security_group.internal_sg.id
+            aws_security_group.internal_sg.id,
+            # aws_security_group.internet_interfacing_sg.id,
         ]
     }
 
